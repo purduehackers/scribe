@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ColorPicker from 'svelte-awesome-color-picker';
 	import { generateSvg } from '$lib';
 	import { onMount } from 'svelte';
 	let data = '<p>EMPTY</p>';
@@ -7,6 +8,7 @@
 	let fontSize = 70;
 	let xOffset = 50;
 	let mount = false;
+	let hex: string = '#000000';
 
 	$: {
 		if (mount) {
@@ -14,7 +16,7 @@
 			xOffset = Math.max(xOffset, 0);
 			contents = contents.toUpperCase();
 			contents = contents.replace(/[^a-zA-Z\s\n]/g, '');
-			data = generateSvg(contents, fontSize, xOffset, xOffset / 2);
+			data = generateSvg(contents, fontSize, xOffset, xOffset / 2, hex);
 			download = URL.createObjectURL(new Blob([data], { type: 'image/svg' }));
 		}
 	}
@@ -24,12 +26,17 @@
 	});
 </script>
 
+<svelte:head>
+	<title>SCRIBE</title>
+</svelte:head>
+
 <div class="flex flex-col items-center outline-amber-400 outline-2 outline m-2 p-5 [&>*]:m-1">
 	<h1 class="font-bold text-6xl">SCRIBE</h1>
 	<p>A utility to generate isometric SVGs of arbitrary text.</p>
 	<div class="flex flex-col items-center">
 		<label for="contents" class="mb-3">Contents:</label>
 		<textarea id="contents" bind:value={contents} />
+		<ColorPicker bind:hex label="Stroke Color" position="responsive" />
 	</div>
 	<p class="text-sm">⚠️ This only supports letters at the moment.</p>
 	{#if download !== null}

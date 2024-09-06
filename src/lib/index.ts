@@ -6,7 +6,8 @@ export function generateSvg(
 	content: string,
 	fontSize: number,
 	offset: number,
-	yOffset: number
+	yOffset: number,
+	color: string
 ): string {
 	content = content.toUpperCase();
 	const lines = content.split('\n');
@@ -33,7 +34,8 @@ export function generateSvg(
 			const text = draw.text(char);
 			text
 				.move(i * offset, fontSize + line * fontSize - i * yOffset - minY)
-				.font({ family: 'HackFont', size: fontSize });
+				.font({ family: 'HackFont', size: fontSize })
+				.fill(color);
 			i += 1;
 		}
 		line += 1;
