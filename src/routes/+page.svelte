@@ -20,7 +20,6 @@
 	}
 
 	onMount(() => {
-		console.log(data);
 		mount = true;
 	});
 </script>
