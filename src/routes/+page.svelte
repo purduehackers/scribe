@@ -30,14 +30,6 @@
 >
 	<h1 class="font-bold text-6xl">SCRIBE</h1>
 	<p>A utility to generate isometric SVGs of arbitrary text.</p>
-	<div class="inline">
-		<label for="offset" class="mr-3">X Offset:</label>
-		<input id="offset" type="number" bind:value={xOffset} />
-	</div>
-	<div class="inline">
-		<label for="font" class="mr-3">Font Size:</label>
-		<input id="font" type="number" bind:value={fontSize} />
-	</div>
 	<div class="flex flex-col items-center">
 		<label for="contents" class="mb-3">Contents:</label>
 		<textarea id="contents" bind:value={contents} />
@@ -48,6 +40,18 @@
 			>DOWNLOAD</a
 		>
 	{/if}
+	<div class="outline-red-400 outline-2 outline-dashed flex flex-col [&>*]:m-1 items-center p-1">
+		<p>⚠️ Changing these settings may adversely impact rendering!</p>
+		<div class="inline">
+			<label for="offset" class="mr-3">X Offset:</label>
+			<input id="offset" type="number" bind:value={xOffset} />
+		</div>
+		<div class="inline">
+			<label for="font" class="mr-3">Font Size:</label>
+			<input id="font" type="number" bind:value={fontSize} />
+		</div>
+	</div>
+
 	<p class="text-xs text-gray-500">
 		🧱 A Purdue Hackers Project · <a
 			href="https://github.com/PurdueHackers/scribe"
