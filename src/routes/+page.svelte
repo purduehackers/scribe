@@ -24,9 +24,7 @@
 	});
 </script>
 
-<div
-	class="content-center flex flex-col items-center outline-amber-400 outline-2 outline m-2 p-5 [&>*]:m-1"
->
+<div class="flex flex-col items-center outline-amber-400 outline-2 outline m-2 p-5 [&>*]:m-1">
 	<h1 class="font-bold text-6xl">SCRIBE</h1>
 	<p>A utility to generate isometric SVGs of arbitrary text.</p>
 	<div class="flex flex-col items-center">
