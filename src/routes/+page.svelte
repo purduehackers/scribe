@@ -14,7 +14,7 @@
 		if (mount) {
 			fontSize = Math.max(fontSize, 0);
 			xOffset = Math.max(xOffset, 0);
-			contents = contents.toUpperCase();
+			// contents = contents.toUpperCase();
 			contents = contents.replace(/[^a-zA-Z\s\n]/g, '');
 			data = generateSvg(contents, fontSize, xOffset, xOffset / 2, hex);
 			download = URL.createObjectURL(new Blob([data], { type: 'image/svg' }));
