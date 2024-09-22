@@ -29,6 +29,7 @@ export function generateSvg(
 	for (const con of lines) {
 		let i = 0;
 		let accumulator = 0;
+		let yCorrection = 0;
 		for (const char of con) {
 			const kernedOffset = (function o(c: string) {
 				if (c === 'i' || c === 'l') {
@@ -42,12 +43,21 @@ export function generateSvg(
 			const text = draw.text(char);
 			// Extra offset for lowercase drop characters like p
 			text
-				.move(accumulator, fontSize + line * (fontSize + 10) - i * yOffset - minY)
+				.move(accumulator, fontSize + line * (fontSize + 10) - i * yOffset - minY + yCorrection)
 				.font({ family: 'HackFont', size: fontSize })
 				.fill(color);
 			i += 1;
 
 			accumulator += kernedOffset;
+			yCorrection += (function o(c: string) {
+				if (c === 'i' || c === 'l') {
+					return yOffset * 0.4;
+				} else if (c === 'f' || c === 'j') {
+					return yOffset * 0.5;
+				} else {
+					return 0;
+				}
+			})(char);
 		}
 		line += 1;
 	}
