@@ -51,9 +51,9 @@ export function generateSvg(
 			accumulator += kernedOffset;
 			yCorrection += (function o(c: string) {
 				if (c === 'i' || c === 'l') {
-					return yOffset * 0.4;
+					return yOffset * 0.2;
 				} else if (c === 'f' || c === 'j') {
-					return yOffset * 0.5;
+					return yOffset * 0.3;
 				} else {
 					return 0;
 				}
