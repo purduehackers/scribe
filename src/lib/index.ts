@@ -1,5 +1,6 @@
 // place files you want to import through the `$lib` alias in this folder.
-import font from './PHACKISOMETRIC.ttf?base64';
+import font from './Font.ttf?base64';
+import fontInverted from './FontInverted.ttf?base64';
 import { SVG, extend as SVGextend, Element as SVGElement } from '@svgdotjs/svg.js';
 
 export function generateSvg(
@@ -7,7 +8,8 @@ export function generateSvg(
 	fontSize: number,
 	offset: number,
 	yOffset: number,
-	color: string
+	color: string,
+	invert: boolean
 ): string {
 	const lines = content.split('\n');
 	let maxWidth = 0;
@@ -24,7 +26,10 @@ export function generateSvg(
 	const draw = SVG()
 		.size('100%', '100%')
 		.viewbox(`0 0 ${maxWidth * offset} ${(lines.length + 1) * fontSize - minY}`);
-	draw.fontface('HackFont', `url("data:application/x-font-ttf;base64,${font}")`);
+	draw.fontface(
+		invert ? 'HackFontInverted' : 'HackFont',
+		`url("data:application/x-font-ttf;base64,${invert ? fontInverted : font}")`
+	);
 	let line = 0;
 	for (const con of lines) {
 		let i = 0;
@@ -44,7 +49,7 @@ export function generateSvg(
 			// Extra offset for lowercase drop characters like p
 			text
 				.move(accumulator, fontSize + line * (fontSize + 10) - i * yOffset - minY + yCorrection)
-				.font({ family: 'HackFont', size: fontSize })
+				.font({ family: invert ? 'HackFontInverted' : 'HackFont', size: fontSize })
 				.fill(color);
 			i += 1;
 

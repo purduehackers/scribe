@@ -9,6 +9,7 @@
 	let xOffset = 50;
 	let mount = false;
 	let hex: string = '#000000';
+	let invert: boolean = false;
 
 	$: {
 		if (mount) {
@@ -16,7 +17,7 @@
 			xOffset = Math.max(xOffset, 0);
 			// contents = contents.toUpperCase();
 			contents = contents.replace(/[^a-zA-Z\s\n]/g, '');
-			data = generateSvg(contents, fontSize, xOffset, xOffset / 2, hex);
+			data = generateSvg(contents, fontSize, xOffset, xOffset / 2, hex, invert);
 			download = URL.createObjectURL(new Blob([data], { type: 'image/svg' }));
 		}
 	}
@@ -36,7 +37,11 @@
 	<div class="flex flex-col items-center">
 		<label for="contents" class="mb-3">Contents:</label>
 		<textarea id="contents" bind:value={contents} />
-		<ColorPicker bind:hex label="Stroke Color" position="responsive" />
+		<div class="flex">
+			<label for="invert" class="mr-3">Invert:</label>
+			<input id="invert" type="checkbox" bind:checked={invert} />
+		</div>
+		<ColorPicker bind:hex label={`${invert ? 'Fill' : 'Stroke'} Color`} position="responsive" />
 	</div>
 	<p class="text-sm">⚠️ This only supports letters at the moment.</p>
 	{#if download !== null}
